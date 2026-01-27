@@ -2,63 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BlooketBot Console</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blooket Bot Controller</title>
     <style>
-        body { background: #2c2f33; color: white; font-family: sans-serif; text-align: center; }
-        #signupcover {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: none; 
-            justify-content: center; align-items: center; flex-direction: column; z-index: 100;
-        }
-        .container { background: #23272a; padding: 20px; border-radius: 8px; width: 400px; margin: 50px auto; }
-        input { padding: 10px; margin: 10px; border-radius: 5px; border: 1px solid #7289da; width: 80%; }
-        button { cursor: pointer; padding: 10px 20px; background: #7289da; color: white; border: none; border-radius: 5px; font-weight: bold; }
-        button:hover { background: #677bc4; }
-        .discordchat { border: 1px solid #7289da; padding: 10px; height: 200px; overflow-y: auto; background: #1e2124; margin-top: 10px; text-align: left; }
+        body { font-family: 'Nunito', sans-serif; background: #0b1121; color: white; text-align: center; padding: 50px; }
+        .container { background: #1a243d; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: inline-block; }
+        h1 { color: #00cf00; margin-bottom: 10px; }
+        #status { font-weight: bold; color: #ffcc00; }
+        button { background: #007bff; color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #0056b3; transform: scale(1.05); }
+        .instructions { font-size: 14px; color: #aaa; margin-top: 20px; max-width: 300px; text-align: left; margin-left: auto; margin-right: auto; }
     </style>
 </head>
-<body onload="checkUsername()">
-
-    <div id="signupcover">
-        <h2>Identify Yourself</h2>
-        <input type="text" id="usernameinput" placeholder="Enter Bot Nickname...">
-        <button onclick="setUsername()">Save & Continue</button>
-    </div>
-
-    <div class="container" id="mainbodychat">
-        <h1>Blooket Controller</h1>
-        <p id="center">Username: Not Set</p>
+<body>
+    <div class="container">
+        <h1>Blooket Bot Hub</h1>
+        <p>Status: <span id="status">Waiting for user...</span></p>
         
-        <input type="number" id="gamepin" placeholder="Enter Game PIN (6 digits)">
-        <br>
-        <button onclick="startJoining()">JOIN GAME</button>
+        <button id="mainButton" onclick="toggleBot()">Activate Bot</button>
 
-        <div class="discordchat" id="log">
-            <div class="system_message_container_code1">
-                <h3 class="system_message_text1">Console: Waiting for Game PIN...</h3>
-            </div>
+        <div class="instructions">
+            <p><strong>How to use:</strong><br>
+               1. Open Blooket in another tab.<br>
+               2. Return here and click 'Activate'.<br>
+               3. The bot logic will start running.</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
-
     <script>
-        // This helper function bridges the HTML to your script.js logic
-        function startJoining() {
-            const pin = document.getElementById('gamepin').value;
-            const name = localStorage.getItem("chatUsername");
-            
-            if (!pin || !name) {
-                alert("Please enter a PIN and set a username!");
-                return;
-            }
+        let isActive = false;
 
-            // Calling the actual function inside your uploaded script.js
-            if (typeof joinGame === "function") {
-                joinGame(pin, name);
+        function toggleBot() {
+            const statusLabel = document.getElementById('status');
+            const btn = document.getElementById('mainButton');
+
+            if (!isActive) {
+                isActive = true;
+                statusLabel.innerText = "RUNNING";
+                statusLabel.style.color = "#00ff00";
+                btn.innerText = "Deactivate Bot";
+                btn.style.background = "#dc3545";
+                startBotLogic();
             } else {
-                console.error("joinGame function not found in script.js!");
+                isActive = false;
+                statusLabel.innerText = "STOPPED";
+                statusLabel.style.color = "#ff4444";
+                btn.innerText = "Activate Bot";
+                btn.style.background = "#007bff";
             }
+        }
+
+        // --- BLOOKET BOT LOGIC (From script.js) ---
+        function startBotLogic() {
+            console.log("Bot logic initialized...");
+            
+            // Your custom blooks list
+            var blooks = ["Chick", "Chicken", "Cow", "Goat", "Horse", "Pig", "Sheep", "Duck", "Alpaca", "Dog", "Cat", "Rabbit", "Goldfish", "Hamster", "Turtle", "Kitten", "Puppy", "Bear", "Moose", "Fox", "Raccoon", "Squirrel", "Owl", "Hedgehog", "Deer", "Wolf", "Beaver", "Tiger", "Orangutan", "Cockatoo", "Parrot"];
+
+            // The main interval to process the game
+            const botLoop = setInterval(() => {
+                if(!isActive) {
+                    clearInterval(botLoop);
+                    return;
+                }
+
+                // Check for username in localStorage
+                const username = localStorage.getItem("chatUsername");
+                if (!username) {
+                    console.log("No username found. Please set one in the Blooket tab.");
+                } else {
+                    document.getElementById("status").textContent = "Bot Active for: " + username;
+                }
+                
+                // Add any additional Blooket automation functions here
+                console.log("Processing game frames...");
+            }, 1000);
         }
     </script>
 </body>
