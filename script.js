@@ -1,12 +1,4 @@
-//had to add grabify to stop the skids in pandas stream
-//doxx yourself here: https://grabify.link/3N7WOE
-//window.location.href="https://grabify.link/3N7WOE";
-//if you made it here, you're somewhat a skid but at least you knew to click script.js
-//BLOOK DEFINITIONS START
-//if(!localStorage.getItem("seendomain")){confirm("Blooket Bot is officially being moved to vercel. The glitch version will no longer be recieving updates. Press OK to redirect.")?
-//im not making an official version for vercel so forget all of that nonsense up there
-//stewart can't code without react and firebase
-//bro had to pay someone to code auth into firebase
+// T!tan blooket bot
 const hitler = "1#0#1#0#1$3#0#0#1#6#0#0$0";
 var blooks = [
   "Chick",
