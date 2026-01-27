@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BlooketBot Console</title>
+    <style>
+        body { background: #2c2f33; color: white; font-family: sans-serif; }
+        #signupcover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; 
+            justify-content: center; align-items: center; flex-direction: column;
+        }
+        .discordchat { border: 1px solid #7289da; padding: 10px; height: 300px; overflow-y: scroll; margin-top: 20px; }
+        .system_message_container_code1 { color: #43b581; font-weight: bold; } /* Green for Success */
+        .system_message_container_code0 { color: #f04747; font-weight: bold; } /* Red for Error */
+        #mainbodychat { background: #23272a; padding: 20px; border-radius: 8px; width: 80%; margin: auto; }
+        button { cursor: pointer; padding: 10px; background: #7289da; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body onload="checkUsername()">
+
+    <div id="signupcover">
+        <h2>Enter Bot Username</h2>
+        <input type="text" id="usernameinput" placeholder="Bot Name...">
+        <br>
+        <button onclick="setUsername()">Start Bot</button>
+    </div>
+
+    <div id="mainbodychat">
+        <h1>BlooketBot Control Panel</h1>
+        <div id="center">Username: Not Set</div>
+        <hr>
+        
+        <div class="discordchat">
+            <div class="system_message_container_code1">
+                <h3 class="system_message_text1">System: Script Loaded. Waiting for user...</h3>
+            </div>
+        </div>
+
+        <button onclick="closediscordchat()">Close Console</button>
+    </div>
+
+    <script src="https://raw.githubusercontent.com/helloflygh/blooket-bot/main/script.js"></script>
+</body>
+</html>
